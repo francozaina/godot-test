@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://btree001"]
 
-[ext_resource type="Texture2D" path="res://assets/tree.png" id="1_tree_tex"]
+[ext_resource type="Texture2D" path="res://assets/trees/tree.png" id="1_tree_tex"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_trunk"]
 size = Vector2(32, 32)

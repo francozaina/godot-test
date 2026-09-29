@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bworld001"]
 
-[ext_resource type="Texture2D" uid="uid://dm8eqt7oj3psr" path="res://assets/grass.png" id="1_grass"]
-[ext_resource type="Texture2D" uid="uid://ctcflps417176" path="res://assets/wood_floor.png" id="2_wood"]
-[ext_resource type="Texture2D" uid="uid://c3ssnmo8ud6e1" path="res://assets/wall_gray.png" id="3_wall"]
+[ext_resource type="Texture2D" path="res://assets/environment/grass.png" id="1_grass"]
+[ext_resource type="Texture2D" path="res://assets/central_room/wood_floor.png" id="2_wood"]
+[ext_resource type="Texture2D" path="res://assets/central_room/wall_gray.png" id="3_wall"]
 [ext_resource type="PackedScene" uid="uid://btree001" path="res://scenes/tree_obstacle.tscn" id="4_tree_scene"]
 [ext_resource type="PackedScene" uid="uid://bplayer001" path="res://scenes/player.tscn" id="5_player_scene"]
 [ext_resource type="Texture2D" uid="uid://gt1kmy7shfkw" path="res://assets/mansion/wood_floor.png" id="6_mansion_wood"]

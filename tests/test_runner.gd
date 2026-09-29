@@ -12,8 +12,7 @@ func _ready() -> void:
 	for i in range(10):
 		await get_tree().physics_frame
 
-	var entities: Node2D = world.get_node("Entities")
-	var player: CharacterBody2D = entities.get_node("Player")
+	var player: CharacterBody2D = world.find_child("Player", true, false)
 	var camera: Camera2D = player.get_node("Camera2D")
 	var fireplace: StaticBody2D = world.find_child("MansionFireplace", true, false)
 	var bookcase: StaticBody2D = world.find_child("MansionBookcase", true, false)
@@ -23,25 +22,24 @@ func _ready() -> void:
 	var chair_l: StaticBody2D = world.find_child("MansionArmchairLeft", true, false)
 	var chair_r: StaticBody2D = world.find_child("MansionArmchairRight", true, false)
 
-	var walls: Node2D = world.get_node("Walls")
-	var wall_north: StaticBody2D = walls.get_node("WallNorth")
-	var wall_east: StaticBody2D = walls.get_node("WallEast")
-	var wall_south_l: StaticBody2D = walls.get_node("WallSouthLeft")
-	var wall_south_r: StaticBody2D = walls.get_node("WallSouthRight")
-	var wall_div_n: StaticBody2D = walls.get_node("WallDividingNorth")
-	var wall_div_s: StaticBody2D = walls.get_node("WallDividingSouth")
-	var wall_bed_n: StaticBody2D = walls.get_node("WallBedroomNorth")
-	var wall_bed_w: StaticBody2D = walls.get_node("WallBedroomWest")
-	var wall_bed_s: StaticBody2D = walls.get_node("WallBedroomSouth")
+	var wall_north: StaticBody2D = world.find_child("WallNorth", true, false)
+	var wall_east: StaticBody2D = world.find_child("WallEast", true, false)
+	var wall_south_l: StaticBody2D = world.find_child("WallSouthLeft", true, false)
+	var wall_south_r: StaticBody2D = world.find_child("WallSouthRight", true, false)
+	var wall_div_n: StaticBody2D = world.find_child("WallDividingNorth", true, false)
+	var wall_div_s: StaticBody2D = world.find_child("WallDividingSouth", true, false)
+	var wall_bed_n: StaticBody2D = world.find_child("WallBedroomNorth", true, false)
+	var wall_bed_w: StaticBody2D = world.find_child("WallBedroomWest", true, false)
+	var wall_bed_s: StaticBody2D = world.find_child("WallBedroomSouth", true, false)
 
-	var floor_node: Node2D = world.get_node("Floor")
-	var suite_floor: Sprite2D = floor_node.get_node("MansionSuiteFloor")
-	var rug: Sprite2D = floor_node.get_node("VictorianRug")
-	var threshold: Sprite2D = floor_node.get_node("DoorwayThreshold")
+	var suite_floor: Sprite2D = world.find_child("MansionSuiteFloor", true, false)
+	var rug: Sprite2D = world.find_child("VictorianRug", true, false)
+	var threshold: Sprite2D = world.find_child("DoorwayThreshold", true, false)
 
 	# ----------------------------------------------------
 	# TEST 1: Estructura de Nodos Completa
 	# ----------------------------------------------------
+	assert(player != null, "Player debe existir")
 	assert(fireplace != null, "MansionFireplace debe existir")
 	assert(bookcase != null, "MansionBookcase debe existir")
 	assert(bed != null, "MansionBed debe existir")
@@ -56,7 +54,7 @@ func _ready() -> void:
 	assert(wall_bed_s != null, "WallBedroomSouth debe existir")
 	assert(suite_floor != null, "MansionSuiteFloor debe existir")
 	assert(rug != null, "VictorianRug debe existir")
-	assert(threshold != null, "DoorwayThreshold debe existir en Floor")
+	assert(threshold != null, "DoorwayThreshold debe existir")
 	print("✓ TEST 1 PASADO: Estructura de nodos completa y verificada.")
 
 	# ----------------------------------------------------

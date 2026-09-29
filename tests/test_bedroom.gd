@@ -19,8 +19,7 @@ func _ready() -> void:
 	for i in range(10):
 		await get_tree().physics_frame
 
-	var entities: Node2D = world.get_node("Entities")
-	var player: CharacterBody2D = entities.get_node("Player")
+	var player: CharacterBody2D = world.find_child("Player", true, false)
 	var fireplace: StaticBody2D = world.find_child("MansionFireplace", true, false)
 	var bookcase: StaticBody2D = world.find_child("MansionBookcase", true, false)
 	var bed: StaticBody2D = world.find_child("MansionBed", true, false)
@@ -29,19 +28,18 @@ func _ready() -> void:
 	var chair_l: StaticBody2D = world.find_child("MansionArmchairLeft", true, false)
 	var chair_r: StaticBody2D = world.find_child("MansionArmchairRight", true, false)
 
-	var walls: Node2D = world.get_node("Walls")
-	var wall_div_n: StaticBody2D = walls.get_node("WallDividingNorth")
-	var wall_div_s: StaticBody2D = walls.get_node("WallDividingSouth")
-	var wall_bed_n: StaticBody2D = walls.get_node("WallBedroomNorth")
-	var wall_bed_w: StaticBody2D = walls.get_node("WallBedroomWest")
-	var wall_bed_s: StaticBody2D = walls.get_node("WallBedroomSouth")
+	var wall_div_n: StaticBody2D = world.find_child("WallDividingNorth", true, false)
+	var wall_div_s: StaticBody2D = world.find_child("WallDividingSouth", true, false)
+	var wall_bed_n: StaticBody2D = world.find_child("WallBedroomNorth", true, false)
+	var wall_bed_w: StaticBody2D = world.find_child("WallBedroomWest", true, false)
+	var wall_bed_s: StaticBody2D = world.find_child("WallBedroomSouth", true, false)
 
-	var floor_node: Node2D = world.get_node("Floor")
-	var suite_floor: Sprite2D = floor_node.get_node("MansionSuiteFloor")
-	var rug: Sprite2D = floor_node.get_node("VictorianRug")
-	var threshold: Sprite2D = floor_node.get_node("DoorwayThreshold")
+	var suite_floor: Sprite2D = world.find_child("MansionSuiteFloor", true, false)
+	var rug: Sprite2D = world.find_child("VictorianRug", true, false)
+	var threshold: Sprite2D = world.find_child("DoorwayThreshold", true, false)
 
 	# TEST 1: Verificación de Existencia de Nodos de Arte y Escena
+	assert(player != null, "Player no encontrado")
 	assert(fireplace != null, "Fireplace no encontrado")
 	assert(bookcase != null, "Bookcase no encontrado")
 	assert(bed != null, "Bed no encontrado")
@@ -72,19 +70,15 @@ func _ready() -> void:
 	print("✓ TEST 2 PASADO: y_sort_enabled activo en World, Player y todos los elementos.")
 
 	# TEST 3: Colisiones de Muebles en sus posiciones actuales
-	# Test colisión chimenea (en position -190, -60)
 	var test_fireplace = player.test_move(Transform2D(0, Vector2(-190, -35)), Vector2(0, -30))
 	assert(test_fireplace, "La chimenea debe bloquear al jugador en su base")
 
-	# Test colisión cama (en position -328, -48)
 	var test_bed = player.test_move(Transform2D(0, Vector2(-328, -10)), Vector2(0, -35))
 	assert(test_bed, "La cama victoriana debe bloquear al jugador")
 
-	# Test colisión escritorio (en position -401, 130)
 	var test_desk = player.test_move(Transform2D(0, Vector2(-401, 95)), Vector2(0, 35))
 	assert(test_desk, "El escritorio de estudio debe bloquear al jugador")
 
-	# Test colisión sillón (en position -399, 83)
 	var test_chair = player.test_move(Transform2D(0, Vector2(-399, 115)), Vector2(0, -30))
 	assert(test_chair, "El sillón debe bloquear al jugador")
 	print("✓ TEST 3 PASADO: Las colisiones físicas en las bases de los muebles bloquean correctamente.")

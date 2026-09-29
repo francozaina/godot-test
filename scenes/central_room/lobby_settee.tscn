@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcr_settee01"]
+
+[ext_resource type="Texture2D" path="res://assets/central_room/lobby_settee.png" id="1_settee_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_settee"]
+size = Vector2(56, 18)
+
+[node name="LobbySettee" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -18)
+texture = ExtResource("1_settee_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_settee")

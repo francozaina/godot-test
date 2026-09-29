@@ -16,6 +16,19 @@
 [ext_resource type="PackedScene" path="res://scenes/mansion/nightstand.tscn" id="15_nightstand_scene"]
 [ext_resource type="PackedScene" path="res://scenes/mansion/study_desk.tscn" id="16_desk_scene"]
 [ext_resource type="PackedScene" path="res://scenes/mansion/armchair.tscn" id="17_armchair_scene"]
+[ext_resource type="Texture2D" path="res://assets/central_room/wall_lobby.png" id="18_wall_lobby"]
+[ext_resource type="Texture2D" path="res://assets/central_room/lobby_rug.png" id="19_lobby_rug"]
+[ext_resource type="PackedScene" path="res://scenes/central_room/grandfather_clock.tscn" id="20_clock_scene"]
+[ext_resource type="PackedScene" path="res://scenes/central_room/hall_console_table.tscn" id="21_console_scene"]
+[ext_resource type="PackedScene" path="res://scenes/central_room/coat_rack.tscn" id="22_coatrack_scene"]
+[ext_resource type="PackedScene" path="res://scenes/central_room/lobby_settee.tscn" id="23_settee_scene"]
+[ext_resource type="PackedScene" path="res://scenes/central_room/statue_pedestal.tscn" id="24_pedestal_scene"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_lobby_n"]
+size = Vector2(512, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_lobby_s"]
+size = Vector2(224, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_h"]
 size = Vector2(320, 32)
@@ -1547,30 +1560,6 @@ position = Vector2(-928, 928)
 [node name="Tree_495" parent="Trees" unique_id=80270261 instance=ExtResource("4_tree_scene")]
 position = Vector2(928, 928)
 
-[node name="Tree_496" parent="Trees" unique_id=1144469346 instance=ExtResource("4_tree_scene")]
-position = Vector2(256, 480)
-
-[node name="Tree_497" parent="Trees" unique_id=1944229516 instance=ExtResource("4_tree_scene")]
-position = Vector2(288, 480)
-
-[node name="Tree_498" parent="Trees" unique_id=885784318 instance=ExtResource("4_tree_scene")]
-position = Vector2(320, 480)
-
-[node name="Tree_499" parent="Trees" unique_id=2000806807 instance=ExtResource("4_tree_scene")]
-position = Vector2(352, 480)
-
-[node name="Tree_500" parent="Trees" unique_id=686333616 instance=ExtResource("4_tree_scene")]
-position = Vector2(384, 480)
-
-[node name="Tree_501" parent="Trees" unique_id=2047910439 instance=ExtResource("4_tree_scene")]
-position = Vector2(416, 480)
-
-[node name="Tree_502" parent="Trees" unique_id=1625936888 instance=ExtResource("4_tree_scene")]
-position = Vector2(448, 480)
-
-[node name="Tree_503" parent="Trees" unique_id=105073849 instance=ExtResource("4_tree_scene")]
-position = Vector2(480, 480)
-
 [node name="CentralRoom" type="Node2D" parent="." unique_id=1291725721]
 y_sort_enabled = true
 
@@ -1580,32 +1569,45 @@ z_index = -1
 [node name="MansionRoomFloor" type="Sprite2D" parent="CentralRoom/Floor" unique_id=956366044]
 texture_filter = 1
 texture_repeat = 2
+position = Vector2(96, 0)
 texture = ExtResource("2_wood")
 region_enabled = true
-region_rect = Rect2(-160, -160, 320, 320)
+region_rect = Rect2(-256, -160, 512, 320)
+
+[node name="LobbyRug" type="Sprite2D" parent="CentralRoom/Floor" unique_id=956366045]
+texture_filter = 1
+position = Vector2(96, 6)
+texture = ExtResource("19_lobby_rug")
+
+[node name="EntranceThreshold" type="Sprite2D" parent="CentralRoom/Floor" unique_id=956366046]
+texture_filter = 1
+position = Vector2(96, 144)
+scale = Vector2(2, 0.444)
+texture = ExtResource("8_threshold")
 
 [node name="Walls" type="Node2D" parent="CentralRoom" unique_id=1291725723]
 
 [node name="WallNorth" type="StaticBody2D" parent="CentralRoom/Walls" unique_id=1821737748]
-position = Vector2(0, -144)
+position = Vector2(96, -144)
 
 [node name="Sprite2D" type="Sprite2D" parent="CentralRoom/Walls/WallNorth" unique_id=1198503647]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_wall")
+position = Vector2(0, -8)
+texture = ExtResource("18_wall_lobby")
 region_enabled = true
-region_rect = Rect2(0, 0, 320, 32)
+region_rect = Rect2(0, 0, 512, 48)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentralRoom/Walls/WallNorth" unique_id=1662387455]
-shape = SubResource("RectangleShape2D_wall_h")
+shape = SubResource("RectangleShape2D_wall_lobby_n")
 
 [node name="WallEast" type="StaticBody2D" parent="CentralRoom/Walls" unique_id=823610046]
-position = Vector2(144, 0)
+position = Vector2(336, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="CentralRoom/Walls/WallEast" unique_id=257972486]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_wall")
+texture = ExtResource("18_wall_lobby")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 256)
 
@@ -1613,30 +1615,51 @@ region_rect = Rect2(0, 0, 32, 256)
 shape = SubResource("RectangleShape2D_wall_v")
 
 [node name="WallSouthLeft" type="StaticBody2D" parent="CentralRoom/Walls" unique_id=409425926]
-position = Vector2(-96, 144)
+position = Vector2(-48, 144)
 
 [node name="Sprite2D" type="Sprite2D" parent="CentralRoom/Walls/WallSouthLeft" unique_id=950733935]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_wall")
+texture = ExtResource("18_wall_lobby")
 region_enabled = true
-region_rect = Rect2(0, 0, 128, 32)
+region_rect = Rect2(0, 0, 224, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentralRoom/Walls/WallSouthLeft" unique_id=242128855]
-shape = SubResource("RectangleShape2D_wall_short")
+shape = SubResource("RectangleShape2D_wall_lobby_s")
 
 [node name="WallSouthRight" type="StaticBody2D" parent="CentralRoom/Walls" unique_id=1195014382]
-position = Vector2(96, 144)
+position = Vector2(240, 144)
 
 [node name="Sprite2D" type="Sprite2D" parent="CentralRoom/Walls/WallSouthRight" unique_id=1112187860]
 texture_filter = 1
 texture_repeat = 2
-texture = ExtResource("3_wall")
+texture = ExtResource("18_wall_lobby")
 region_enabled = true
-region_rect = Rect2(0, 0, 128, 32)
+region_rect = Rect2(0, 0, 224, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CentralRoom/Walls/WallSouthRight" unique_id=350598223]
-shape = SubResource("RectangleShape2D_wall_short")
+shape = SubResource("RectangleShape2D_wall_lobby_s")
+
+[node name="Furniture" type="Node2D" parent="CentralRoom" unique_id=1291725726]
+y_sort_enabled = true
+
+[node name="LobbyClock" parent="CentralRoom/Furniture" unique_id=2001001 instance=ExtResource("20_clock_scene")]
+position = Vector2(20, -120)
+
+[node name="LobbyConsole" parent="CentralRoom/Furniture" unique_id=2001002 instance=ExtResource("21_console_scene")]
+position = Vector2(96, -120)
+
+[node name="LobbyStatueRight" parent="CentralRoom/Furniture" unique_id=2001003 instance=ExtResource("24_pedestal_scene")]
+position = Vector2(172, -120)
+
+[node name="LobbyStatueLeft" parent="CentralRoom/Furniture" unique_id=2001004 instance=ExtResource("24_pedestal_scene")]
+position = Vector2(-90, -120)
+
+[node name="LobbyCoatRack" parent="CentralRoom/Furniture" unique_id=2001005 instance=ExtResource("22_coatrack_scene")]
+position = Vector2(144, 120)
+
+[node name="LobbySettee" parent="CentralRoom/Furniture" unique_id=2001006 instance=ExtResource("23_settee_scene")]
+position = Vector2(260, 0)
 
 [node name="VictorianRoom" type="Node2D" parent="." unique_id=1291725722]
 y_sort_enabled = true
@@ -1791,4 +1814,4 @@ theme_override_constants/shadow_offset_y = 1
 theme_override_font_sizes/font_size = 14
 text = "Controles: WASD o Flechas
 Correr: Mantener SHIFT
-Mansión: Sala Principal y Suite Victoriana"
+Mansión: Lobby Victoriano y Suite Principal"

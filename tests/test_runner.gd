@@ -176,20 +176,23 @@ func _ready() -> void:
 	print("✓ TEST 8 PASADO: Relaciones Y-sort verificadas rigurosamente.")
 
 	# ----------------------------------------------------
-	# TEST 9: Pruebas de Regresión de la Sala Central y Jardín
+	# TEST 9: Pruebas de Regresión de la Sala Central / Lobby y Jardín
 	# ----------------------------------------------------
-	player.global_position = Vector2(0, 120)
+	player.global_position = Vector2(96, 120)
 	for i in range(2):
 		await get_tree().physics_frame
 	var south_collision = player.test_move(Transform2D(0, player.global_position), Vector2(0, 60))
-	assert(not south_collision, "La salida al jardín sur debe estar despejada sin colisiones")
+	assert(not south_collision, "La salida principal sur al exterior debe estar despejada sin colisiones")
 
 	var hit_north_wall = player.test_move(Transform2D(0, Vector2(0, -120)), Vector2(0, -30))
 	assert(hit_north_wall, "WallNorth debe bloquear el paso hacia el exterior norte")
 
-	var hit_east_wall = player.test_move(Transform2D(0, Vector2(120, 0)), Vector2(30, 0))
-	assert(hit_east_wall, "WallEast debe bloquear el paso hacia el exterior este")
-	print("✓ TEST 9 PASADO: Pruebas de regresión superadas; jardín y paredes de sala principal intactas.")
+	var hit_east_wall = player.test_move(Transform2D(0, Vector2(310, 0)), Vector2(30, 0))
+	assert(hit_east_wall, "WallEast ampliada a la derecha debe bloquear el paso hacia el exterior este")
+
+	var hit_south_wall = player.test_move(Transform2D(0, Vector2(-48, 120)), Vector2(0, 30))
+	assert(hit_south_wall, "WallSouthLeft debe bloquear el paso hacia el exterior sur")
+	print("✓ TEST 9 PASADO: Pruebas de regresión superadas; salida principal y paredes del lobby intactas.")
 
 	# ----------------------------------------------------
 	# TEST 10: Integridad del Perímetro de Árboles

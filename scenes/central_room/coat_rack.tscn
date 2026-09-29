@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcr_coatrack01"]
+
+[ext_resource type="Texture2D" path="res://assets/central_room/coat_rack.png" id="1_rack_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rack"]
+size = Vector2(16, 12)
+
+[node name="CoatRack" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -28)
+texture = ExtResource("1_rack_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_rack")

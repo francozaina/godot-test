@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcr_pedestal01"]
+
+[ext_resource type="Texture2D" path="res://assets/central_room/statue_pedestal.png" id="1_pedestal_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pedestal"]
+size = Vector2(18, 14)
+
+[node name="StatuePedestal" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -24)
+texture = ExtResource("1_pedestal_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_pedestal")

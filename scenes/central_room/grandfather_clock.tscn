@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcr_clock01"]
+
+[ext_resource type="Texture2D" path="res://assets/central_room/grandfather_clock.png" id="1_clock_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_clock"]
+size = Vector2(20, 16)
+
+[node name="GrandfatherClock" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -32)
+texture = ExtResource("1_clock_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8)
+shape = SubResource("RectangleShape2D_clock")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwardrobe001"]
+
+[ext_resource type="Texture2D" path="res://assets/bedroom/wardrobe.png" id="1_wardrobe_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wardrobe_base"]
+size = Vector2(80, 24)
+
+[node name="Wardrobe" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -58)
+texture = ExtResource("1_wardrobe_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -12)
+shape = SubResource("RectangleShape2D_wardrobe_base")

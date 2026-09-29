@@ -195,23 +195,23 @@ func _ready() -> void:
 	# TEST 10: Integridad del Perímetro de Árboles
 	# ----------------------------------------------------
 	var escape_count = 0
-	for ty in range(-380, 380, 4):
-		if not player.test_move(Transform2D(0, Vector2(-650, ty)), Vector2(-50, 0)):
+	for ty in range(-900, 900, 10):
+		if not player.test_move(Transform2D(0, Vector2(-930, ty)), Vector2(-50, 0)):
 			escape_count += 1
-		if not player.test_move(Transform2D(0, Vector2(360, ty)), Vector2(50, 0)):
+		if not player.test_move(Transform2D(0, Vector2(930, ty)), Vector2(50, 0)):
 			escape_count += 1
 	assert(escape_count == 0, "No debe haber brechas de escape en el perímetro de árboles exteriores")
-	print("✓ TEST 10 PASADO: Perímetro exterior completamente sellado (0 brechas de fuga).")
+	print("✓ TEST 10 PASADO: Perímetro exterior completamente sellado en bordes del mapa (0 brechas de fuga).")
 
 	# ----------------------------------------------------
 	# TEST 11: Límites de Cámara y Configuración Top-Down
 	# ----------------------------------------------------
-	assert(camera.limit_left <= -672, "Camera limit_left debe contener el borde oeste")
-	assert(camera.limit_top <= -384, "Camera limit_top debe contener el borde norte")
-	assert(camera.limit_right >= 384, "Camera limit_right debe contener el borde este")
-	assert(camera.limit_bottom >= 384, "Camera limit_bottom debe contener el borde sur")
+	assert(camera.limit_left <= -1024, "Camera limit_left debe contener el borde oeste")
+	assert(camera.limit_top <= -1024, "Camera limit_top debe contener el borde norte")
+	assert(camera.limit_right >= 1024, "Camera limit_right debe contener el borde este")
+	assert(camera.limit_bottom >= 1024, "Camera limit_bottom debe contener el borde sur")
 	assert(player.motion_mode == CharacterBody2D.MOTION_MODE_FLOATING, "Player motion_mode debe ser MOTION_MODE_FLOATING")
-	print("✓ TEST 11 PASADO: Límites de cámara anti-vacío y motion_mode top-down verificados.")
+	print("✓ TEST 11 PASADO: Límites de cámara anti-vacío (-1024 a 1024) y motion_mode top-down verificados.")
 
 	print("\n==================================================")
 	print("TODAS LAS PRUEBAS (11/11) COMPLETADAS CON ÉXITO")

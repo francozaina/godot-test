@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm_desk01"]
+
+[ext_resource type="Texture2D" path="res://assets/mansion/study_desk.png" id="1_desk_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_desk"]
+size = Vector2(58, 20)
+
+[node name="StudyDesk" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -18)
+texture = ExtResource("1_desk_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_desk")

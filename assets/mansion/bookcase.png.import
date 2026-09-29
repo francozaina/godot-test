@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chynwhrkqpnhn"
-path="res://.godot/imported/bedroom_background.png-60846e82610fc17021081802175504b8.ctex"
+uid="uid://ce0l3ybxjotwe"
+path="res://.godot/imported/bookcase.png-7bd9ff50f5543a4567e8745140144a7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/bedroom_background.png"
-dest_files=["res://.godot/imported/bedroom_background.png-60846e82610fc17021081802175504b8.ctex"]
+source_file="res://assets/mansion/bookcase.png"
+dest_files=["res://.godot/imported/bookcase.png-7bd9ff50f5543a4567e8745140144a7a.ctex"]
 
 [params]
 

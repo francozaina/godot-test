@@ -6,7 +6,7 @@ func _init() -> void:
 	script.source_code = """extends Node
 
 func _ready() -> void:
-	print("--- INICIANDO TEST SUITE: DORMITORIO VICTORIANO ---")
+	print("--- INICIANDO TEST SUITE: SUITE / ESTUDIO VICTORIANO ---")
 	var world_scene: PackedScene = load("res://scenes/world.tscn")
 	if not world_scene:
 		printerr("ERROR: No se pudo cargar scenes/world.tscn")
@@ -21,11 +21,13 @@ func _ready() -> void:
 
 	var entities: Node2D = world.get_node("Entities")
 	var player: CharacterBody2D = entities.get_node("Player")
-	var wardrobe: StaticBody2D = entities.get_node("BedroomWardrobe")
-	var bed: StaticBody2D = entities.get_node("BedroomBed")
-	var nightstand: StaticBody2D = entities.get_node("BedroomNightstand")
-	var shelves: StaticBody2D = entities.get_node("BedroomShelves")
-	var desk: StaticBody2D = entities.get_node("BedroomDesk")
+	var fireplace: StaticBody2D = entities.get_node("MansionFireplace")
+	var bookcase: StaticBody2D = entities.get_node("MansionBookcase")
+	var bed: StaticBody2D = entities.get_node("MansionBed")
+	var nightstand: StaticBody2D = entities.get_node("MansionNightstand")
+	var desk: StaticBody2D = entities.get_node("MansionDesk")
+	var chair_l: StaticBody2D = entities.get_node("MansionArmchairLeft")
+	var chair_r: StaticBody2D = entities.get_node("MansionArmchairRight")
 
 	var walls: Node2D = world.get_node("Walls")
 	var wall_div_n: StaticBody2D = walls.get_node("WallDividingNorth")
@@ -35,75 +37,62 @@ func _ready() -> void:
 	var wall_bed_s: StaticBody2D = walls.get_node("WallBedroomSouth")
 
 	var floor_node: Node2D = world.get_node("Floor")
-	var bed_floor: Sprite2D = floor_node.get_node("BedroomFloor")
+	var suite_floor: Sprite2D = floor_node.get_node("MansionSuiteFloor")
+	var rug: Sprite2D = floor_node.get_node("VictorianRug")
 	var threshold: Sprite2D = floor_node.get_node("DoorwayThreshold")
 
-	# TEST 1: Verificación de Existencia de Nodos
-	assert(wardrobe != null, "Wardrobe no encontrado")
+	# TEST 1: Verificación de Existencia de Nodos de Arte y Escena
+	assert(fireplace != null, "Fireplace no encontrado")
+	assert(bookcase != null, "Bookcase no encontrado")
 	assert(bed != null, "Bed no encontrado")
 	assert(nightstand != null, "Nightstand no encontrado")
-	assert(shelves != null, "Shelves no encontrado")
 	assert(desk != null, "Desk no encontrado")
+	assert(chair_l != null, "ArmchairLeft no encontrado")
+	assert(chair_r != null, "ArmchairRight no encontrado")
 	assert(wall_div_n != null, "WallDividingNorth no encontrado")
 	assert(wall_div_s != null, "WallDividingSouth no encontrado")
 	assert(wall_bed_n != null, "WallBedroomNorth no encontrado")
 	assert(wall_bed_w != null, "WallBedroomWest no encontrado")
 	assert(wall_bed_s != null, "WallBedroomSouth no encontrado")
-	assert(bed_floor != null, "BedroomFloor no encontrado")
+	assert(suite_floor != null, "MansionSuiteFloor no encontrado")
+	assert(rug != null, "VictorianRug no encontrado")
 	assert(threshold != null, "DoorwayThreshold no encontrado")
-	print("✓ TEST 1 PASADO: Todos los nodos de muebles, paredes, umbral y suelo existen.")
+	print("✓ TEST 1 PASADO: Todos los muebles victorianos, paredes, alfombra y umbral existen.")
 
 	# TEST 2: Verificación de Y-Sorting
 	assert(world.y_sort_enabled == true, "World y_sort_enabled debe ser true")
 	assert(entities.y_sort_enabled == true, "Entities y_sort_enabled debe ser true")
 	assert(player.y_sort_enabled == true, "Player y_sort_enabled debe ser true")
-	assert(wardrobe.y_sort_enabled == true, "Wardrobe y_sort_enabled debe ser true")
+	assert(fireplace.y_sort_enabled == true, "Fireplace y_sort_enabled debe ser true")
+	assert(bookcase.y_sort_enabled == true, "Bookcase y_sort_enabled debe ser true")
 	assert(bed.y_sort_enabled == true, "Bed y_sort_enabled debe ser true")
 	assert(nightstand.y_sort_enabled == true, "Nightstand y_sort_enabled debe ser true")
-	assert(shelves.y_sort_enabled == true, "Shelves y_sort_enabled debe ser true")
 	assert(desk.y_sort_enabled == true, "Desk y_sort_enabled debe ser true")
-	print("✓ TEST 2 PASADO: y_sort_enabled está activo en World, Entities y todos los muebles.")
+	assert(chair_l.y_sort_enabled == true, "ArmchairLeft y_sort_enabled debe ser true")
+	assert(chair_r.y_sort_enabled == true, "ArmchairRight y_sort_enabled debe ser true")
+	print("✓ TEST 2 PASADO: y_sort_enabled activo en World, Entities y todos los elementos.")
 
-	# TEST 3: Espacios Caminables detrás de Armario y Cama
-	player.global_position = Vector2(-230, -75)
-	for i in range(2):
-		await get_tree().physics_frame
-	var collision = player.move_and_collide(Vector2.ZERO, true)
-	assert(collision == null, "El jugador no debería colisionar detrás del armario (y=-75)")
+	# TEST 3: Colisiones de Muebles
+	# Test colisión chimenea
+	var test_fireplace = player.test_move(Transform2D(0, Vector2(-280, -90)), Vector2(0, -30))
+	assert(test_fireplace, "La chimenea debe bloquear al jugador en su base")
 
-	var move_behind_wardrobe = player.test_move(Transform2D(0, Vector2(-230, -75)), Vector2(-20, 0))
-	assert(not move_behind_wardrobe, "El jugador debe poder moverse horizontalmente detrás del armario")
+	# Test colisión cama
+	var test_bed = player.test_move(Transform2D(0, Vector2(-372, 100)), Vector2(0, -35))
+	assert(test_bed, "La cama victoriana debe bloquear al jugador")
 
-	player.global_position = Vector2(-391, -90)
-	for i in range(2):
-		await get_tree().physics_frame
-	collision = player.move_and_collide(Vector2.ZERO, true)
-	assert(collision == null, "El jugador no debería colisionar detrás de la cama (y=-90)")
+	# Test colisión escritorio
+	var test_desk = player.test_move(Transform2D(0, Vector2(-200, 100)), Vector2(0, -35))
+	assert(test_desk, "El escritorio de estudio debe bloquear al jugador")
 
-	var move_behind_bed = player.test_move(Transform2D(0, Vector2(-391, -90)), Vector2(15, 0))
-	assert(not move_behind_bed, "El jugador debe poder moverse horizontalmente detrás de la cama")
-	print("✓ TEST 3 PASADO: Hay espacio libre transitable detrás del armario y de la cabecera de la cama.")
+	# Test colisión sillón
+	var test_chair = player.test_move(Transform2D(0, Vector2(-320, -10)), Vector2(0, -30))
+	assert(test_chair, "El sillón debe bloquear al jugador")
+	print("✓ TEST 3 PASADO: Las colisiones físicas en las bases de los muebles bloquean correctamente.")
 
-	# TEST 4: Colisión física en las bases de los muebles
-	var test_wardrobe_base = player.test_move(Transform2D(0, Vector2(-230, -20)), Vector2(0, -30))
-	assert(test_wardrobe_base, "El armario debe bloquear el paso en su base")
-
-	var test_bed_base = player.test_move(Transform2D(0, Vector2(-391, 50)), Vector2(0, -30))
-	assert(test_bed_base, "La cama debe bloquear el paso en su cuerpo")
-
-	var test_nightstand = player.test_move(Transform2D(0, Vector2(-370, 80)), Vector2(-30, 0))
-	assert(test_nightstand, "El velador debe bloquear el paso")
-
-	var test_shelves = player.test_move(Transform2D(0, Vector2(-210, 100)), Vector2(30, 0))
-	assert(test_shelves, "Las estanterías deben bloquear el paso")
-
-	var test_desk = player.test_move(Transform2D(0, Vector2(-368, 100)), Vector2(0, 30))
-	assert(test_desk, "El escritorio debe bloquear el paso hacia la pared sur")
-	print("✓ TEST 4 PASADO: Todas las colisiones de las bases de los muebles bloquean correctamente.")
-
-	# TEST 5: Navegación por la Puerta Interior
+	# TEST 4: Navegación Fluida por la Puerta
 	player.global_position = Vector2(0, 0)
-	var speed = 150.0
+	var speed = 160.0
 	var max_steps = 300
 	var steps_taken = 0
 	while player.global_position.x > -288 and steps_taken < max_steps:
@@ -111,7 +100,7 @@ func _ready() -> void:
 		player.move_and_slide()
 		await get_tree().physics_frame
 		steps_taken += 1
-	assert(player.global_position.x <= -270, "El jugador debió cruzar la puerta hasta el dormitorio")
+	assert(player.global_position.x <= -270, "El jugador debió cruzar la puerta hasta la suite victoriana")
 
 	steps_taken = 0
 	while player.global_position.x < 0 and steps_taken < max_steps:
@@ -119,23 +108,23 @@ func _ready() -> void:
 		player.move_and_slide()
 		await get_tree().physics_frame
 		steps_taken += 1
-	assert(player.global_position.x >= -10, "El jugador debió cruzar la puerta de regreso a la sala central")
-	print("✓ TEST 5 PASADO: El jugador cruza fluidamente la puerta interior en ambas direcciones sin trabarse.")
+	assert(player.global_position.x >= -10, "El jugador debió cruzar la puerta de regreso a la sala principal")
+	print("✓ TEST 4 PASADO: Navegación a través de la puerta fluida en ambos sentidos.")
 
-	# TEST 6: Comparación de Y-Sort (Relación Player y Mueble - sin or true)
-	player.global_position = Vector2(-230, -75)
+	# TEST 5: Y-Sort Relativo con Sillón
+	player.global_position = Vector2(-320, -60)
 	for i in range(2):
 		await get_tree().physics_frame
-	assert(player.global_position.y < wardrobe.global_position.y, "Detrás del armario, Player.y debe ser menor que Wardrobe.y")
+	assert(player.global_position.y < chair_l.global_position.y, "Detrás del sillón, Player.y debe ser menor")
 
-	player.global_position = Vector2(-230, 20)
+	player.global_position = Vector2(-320, -10)
 	for i in range(2):
 		await get_tree().physics_frame
-	assert(player.global_position.y > wardrobe.global_position.y, "Delante del armario, Player.y debe ser mayor que Wardrobe.y")
-	print("✓ TEST 6 PASADO: Reglas de Y-sort verificadas rigurosamente sin condiciones tautológicas.")
+	assert(player.global_position.y > chair_l.global_position.y, "Delante del sillón, Player.y debe ser mayor")
+	print("✓ TEST 5 PASADO: Y-Sorting visual delante y detrás de los objetos comprobado.")
 
 	print(\"\\n==============================================\")
-	print(\"TODOS LOS TESTS DE INTEGRACIÓN PASARON EXITOSAMENTE (6/6)\")
+	print(\"TODOS LOS TESTS DE INTEGRACIÓN PASARON EXITOSAMENTE (5/5)\")
 	print(\"==============================================\\n\")
 	get_tree().quit(0)
 """

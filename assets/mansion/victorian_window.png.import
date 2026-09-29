@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wlgd14wf7mcd"
-path="res://.godot/imported/wardrobe.png-c21cbd5fb04965a0373f67ffe431380b.ctex"
+uid="uid://8qesenx5wp7i"
+path="res://.godot/imported/victorian_window.png-f6dae51825f1a6f897f8b7759316cc9a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/wardrobe.png"
-dest_files=["res://.godot/imported/wardrobe.png-c21cbd5fb04965a0373f67ffe431380b.ctex"]
+source_file="res://assets/mansion/victorian_window.png"
+dest_files=["res://.godot/imported/victorian_window.png-f6dae51825f1a6f897f8b7759316cc9a.ctex"]
 
 [params]
 

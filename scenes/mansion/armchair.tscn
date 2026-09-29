@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm_armchair01"]
+
+[ext_resource type="Texture2D" path="res://assets/mansion/armchair.png" id="1_chair_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_chair"]
+size = Vector2(26, 18)
+
+[node name="Armchair" type="StaticBody2D"]
+y_sort_enabled = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -18)
+texture = ExtResource("1_chair_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_chair")

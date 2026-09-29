@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://bm_fireplace01"]
+
+[ext_resource type="Script" path="res://scripts/fireplace.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/mansion/fireplace.png" id="2_fire_tex"]
+[ext_resource type="Texture2D" path="res://assets/mansion/light_glow_warm.png" id="3_glow_tex"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp"]
+size = Vector2(58, 18)
+
+[node name="Fireplace" type="StaticBody2D"]
+y_sort_enabled = true
+script = ExtResource("1_script")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+offset = Vector2(0, -24)
+texture = ExtResource("2_fire_tex")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_fp")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -14)
+color = Color(1, 0.75, 0.4, 1)
+energy = 1.0
+texture = ExtResource("3_glow_tex")
+texture_scale = 3.5

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddswlxq4wpnva"
-path="res://.godot/imported/doorway_threshold.png-efc3970985d721a8bc5a2ceb6615ad2f.ctex"
+uid="uid://c5v5oh02l8siy"
+path="res://.godot/imported/study_desk.png-ab2e664d2ed77580791353b6735843b6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/doorway_threshold.png"
-dest_files=["res://.godot/imported/doorway_threshold.png-efc3970985d721a8bc5a2ceb6615ad2f.ctex"]
+source_file="res://assets/mansion/study_desk.png"
+dest_files=["res://.godot/imported/study_desk.png-ab2e664d2ed77580791353b6735843b6.ctex"]
 
 [params]
 

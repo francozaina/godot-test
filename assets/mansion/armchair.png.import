@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dvr7x5gv8hwwm"
-path="res://.godot/imported/nightstand.png-db49e4a02d085716d7fc3a08c818710c.ctex"
+uid="uid://bn6vn87nvvemm"
+path="res://.godot/imported/armchair.png-bdbbbbf5d3563de53beb6fe44143c9a8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/nightstand.png"
-dest_files=["res://.godot/imported/nightstand.png-db49e4a02d085716d7fc3a08c818710c.ctex"]
+source_file="res://assets/mansion/armchair.png"
+dest_files=["res://.godot/imported/armchair.png-bdbbbbf5d3563de53beb6fe44143c9a8.ctex"]
 
 [params]
 

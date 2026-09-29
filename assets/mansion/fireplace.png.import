@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3wgvhm0vq1v5"
-path="res://.godot/imported/light_glow.png-a134e3e0f1b2a518521eda3fc70a1cdc.ctex"
+uid="uid://cki7tamdqbj5f"
+path="res://.godot/imported/fireplace.png-ba2b630fa038eca5e871b81402e1e37e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/light_glow.png"
-dest_files=["res://.godot/imported/light_glow.png-a134e3e0f1b2a518521eda3fc70a1cdc.ctex"]
+source_file="res://assets/mansion/fireplace.png"
+dest_files=["res://.godot/imported/fireplace.png-ba2b630fa038eca5e871b81402e1e37e.ctex"]
 
 [params]
 

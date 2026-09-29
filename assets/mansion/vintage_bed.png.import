@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qaa8ttaasmvo"
-path="res://.godot/imported/shelves.png-4ce5797acb8866f2911f04891b57876a.ctex"
+uid="uid://ckhhirdb6f3y5"
+path="res://.godot/imported/vintage_bed.png-94808c42597f4cfd47ea1afc53c58702.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/bedroom/shelves.png"
-dest_files=["res://.godot/imported/shelves.png-4ce5797acb8866f2911f04891b57876a.ctex"]
+source_file="res://assets/mansion/vintage_bed.png"
+dest_files=["res://.godot/imported/vintage_bed.png-94808c42597f4cfd47ea1afc53c58702.ctex"]
 
 [params]
 

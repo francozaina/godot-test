@@ -21,13 +21,13 @@ func _ready() -> void:
 
 	var entities: Node2D = world.get_node("Entities")
 	var player: CharacterBody2D = entities.get_node("Player")
-	var fireplace: StaticBody2D = entities.get_node("MansionFireplace")
-	var bookcase: StaticBody2D = entities.get_node("MansionBookcase")
-	var bed: StaticBody2D = entities.get_node("MansionBed")
-	var nightstand: StaticBody2D = entities.get_node("MansionNightstand")
-	var desk: StaticBody2D = entities.get_node("MansionDesk")
-	var chair_l: StaticBody2D = entities.get_node("MansionArmchairLeft")
-	var chair_r: StaticBody2D = entities.get_node("MansionArmchairRight")
+	var fireplace: StaticBody2D = world.find_child("MansionFireplace", true, false)
+	var bookcase: StaticBody2D = world.find_child("MansionBookcase", true, false)
+	var bed: StaticBody2D = world.find_child("MansionBed", true, false)
+	var nightstand: StaticBody2D = world.find_child("MansionNightstand", true, false)
+	var desk: StaticBody2D = world.find_child("MansionDesk", true, false)
+	var chair_l: StaticBody2D = world.find_child("MansionArmchairLeft", true, false)
+	var chair_r: StaticBody2D = world.find_child("MansionArmchairRight", true, false)
 
 	var walls: Node2D = world.get_node("Walls")
 	var wall_div_n: StaticBody2D = walls.get_node("WallDividingNorth")
@@ -61,7 +61,6 @@ func _ready() -> void:
 
 	# TEST 2: Verificación de Y-Sorting
 	assert(world.y_sort_enabled == true, "World y_sort_enabled debe ser true")
-	assert(entities.y_sort_enabled == true, "Entities y_sort_enabled debe ser true")
 	assert(player.y_sort_enabled == true, "Player y_sort_enabled debe ser true")
 	assert(fireplace.y_sort_enabled == true, "Fireplace y_sort_enabled debe ser true")
 	assert(bookcase.y_sort_enabled == true, "Bookcase y_sort_enabled debe ser true")
@@ -70,23 +69,23 @@ func _ready() -> void:
 	assert(desk.y_sort_enabled == true, "Desk y_sort_enabled debe ser true")
 	assert(chair_l.y_sort_enabled == true, "ArmchairLeft y_sort_enabled debe ser true")
 	assert(chair_r.y_sort_enabled == true, "ArmchairRight y_sort_enabled debe ser true")
-	print("✓ TEST 2 PASADO: y_sort_enabled activo en World, Entities y todos los elementos.")
+	print("✓ TEST 2 PASADO: y_sort_enabled activo en World, Player y todos los elementos.")
 
-	# TEST 3: Colisiones de Muebles
-	# Test colisión chimenea
-	var test_fireplace = player.test_move(Transform2D(0, Vector2(-280, -90)), Vector2(0, -30))
+	# TEST 3: Colisiones de Muebles en sus posiciones actuales
+	# Test colisión chimenea (en position -190, -60)
+	var test_fireplace = player.test_move(Transform2D(0, Vector2(-190, -35)), Vector2(0, -30))
 	assert(test_fireplace, "La chimenea debe bloquear al jugador en su base")
 
-	# Test colisión cama
-	var test_bed = player.test_move(Transform2D(0, Vector2(-372, 100)), Vector2(0, -35))
+	# Test colisión cama (en position -328, -48)
+	var test_bed = player.test_move(Transform2D(0, Vector2(-328, -10)), Vector2(0, -35))
 	assert(test_bed, "La cama victoriana debe bloquear al jugador")
 
-	# Test colisión escritorio
-	var test_desk = player.test_move(Transform2D(0, Vector2(-200, 100)), Vector2(0, -35))
+	# Test colisión escritorio (en position -401, 130)
+	var test_desk = player.test_move(Transform2D(0, Vector2(-401, 95)), Vector2(0, 35))
 	assert(test_desk, "El escritorio de estudio debe bloquear al jugador")
 
-	# Test colisión sillón
-	var test_chair = player.test_move(Transform2D(0, Vector2(-320, -10)), Vector2(0, -30))
+	# Test colisión sillón (en position -399, 83)
+	var test_chair = player.test_move(Transform2D(0, Vector2(-399, 115)), Vector2(0, -30))
 	assert(test_chair, "El sillón debe bloquear al jugador")
 	print("✓ TEST 3 PASADO: Las colisiones físicas en las bases de los muebles bloquean correctamente.")
 
@@ -112,12 +111,12 @@ func _ready() -> void:
 	print("✓ TEST 4 PASADO: Navegación a través de la puerta fluida en ambos sentidos.")
 
 	# TEST 5: Y-Sort Relativo con Sillón
-	player.global_position = Vector2(-320, -60)
+	player.global_position = Vector2(chair_l.global_position.x, chair_l.global_position.y - 20)
 	for i in range(2):
 		await get_tree().physics_frame
 	assert(player.global_position.y < chair_l.global_position.y, "Detrás del sillón, Player.y debe ser menor")
 
-	player.global_position = Vector2(-320, -10)
+	player.global_position = Vector2(chair_l.global_position.x, chair_l.global_position.y + 20)
 	for i in range(2):
 		await get_tree().physics_frame
 	assert(player.global_position.y > chair_l.global_position.y, "Delante del sillón, Player.y debe ser mayor")

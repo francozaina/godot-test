@@ -5,12 +5,11 @@
 [ext_resource type="Texture2D" uid="uid://c3ssnmo8ud6e1" path="res://assets/wall_gray.png" id="3_wall"]
 [ext_resource type="PackedScene" uid="uid://btree001" path="res://scenes/tree_obstacle.tscn" id="4_tree_scene"]
 [ext_resource type="PackedScene" uid="uid://bplayer001" path="res://scenes/player.tscn" id="5_player_scene"]
-[ext_resource type="Texture2D" path="res://assets/mansion/wood_floor.png" id="6_mansion_wood"]
-[ext_resource type="Texture2D" path="res://assets/mansion/victorian_rug.png" id="7_mansion_rug"]
-[ext_resource type="Texture2D" path="res://assets/mansion/doorway_threshold.png" id="8_threshold"]
-[ext_resource type="Texture2D" path="res://assets/mansion/wall_victorian.png" id="9_wall_vic"]
-[ext_resource type="Texture2D" path="res://assets/mansion/victorian_window.png" id="10_window"]
-[ext_resource type="Texture2D" path="res://assets/mansion/oil_painting.png" id="11_painting"]
+[ext_resource type="Texture2D" uid="uid://gt1kmy7shfkw" path="res://assets/mansion/wood_floor.png" id="6_mansion_wood"]
+[ext_resource type="Texture2D" uid="uid://br6u8xr44px8s" path="res://assets/mansion/victorian_rug.png" id="7_mansion_rug"]
+[ext_resource type="Texture2D" uid="uid://b0dh0ieqmeutj" path="res://assets/mansion/doorway_threshold.png" id="8_threshold"]
+[ext_resource type="Texture2D" uid="uid://bvrl635stqgs" path="res://assets/mansion/wall_victorian.png" id="9_wall_vic"]
+[ext_resource type="Texture2D" uid="uid://bflrs3kjqy1hv" path="res://assets/mansion/oil_painting.png" id="11_painting"]
 [ext_resource type="PackedScene" path="res://scenes/mansion/fireplace.tscn" id="12_fireplace_scene"]
 [ext_resource type="PackedScene" path="res://scenes/mansion/bookcase.tscn" id="13_bookcase_scene"]
 [ext_resource type="PackedScene" path="res://scenes/mansion/vintage_bed.tscn" id="14_bed_scene"]
@@ -31,7 +30,7 @@ size = Vector2(128, 32)
 size = Vector2(32, 92)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall_bedroom_h"]
-size = Vector2(304, 32)
+size = Vector2(304, 45.5)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud"]
 bg_color = Color(0.12, 0.14, 0.18, 0.85)
@@ -46,6 +45,10 @@ expand_margin_bottom = 8.0
 
 [node name="World" type="Node2D" unique_id=1203014614]
 y_sort_enabled = true
+
+[node name="MansionBookcase" parent="." unique_id=606385974 instance=ExtResource("13_bookcase_scene")]
+top_level = true
+position = Vector2(-401, -59)
 
 [node name="Floor" type="Node2D" parent="." unique_id=393135298]
 z_index = -1
@@ -67,7 +70,8 @@ region_rect = Rect2(-160, -160, 320, 320)
 [node name="MansionSuiteFloor" type="Sprite2D" parent="Floor" unique_id=1882862893]
 texture_filter = 1
 texture_repeat = 2
-position = Vector2(-288, 0)
+position = Vector2(-296, 0)
+scale = Vector2(1.0625, 1)
 texture = ExtResource("6_mansion_wood")
 region_enabled = true
 region_rect = Rect2(0, 0, 256, 256)
@@ -168,22 +172,20 @@ position = Vector2(-296, -144)
 [node name="Sprite2D" type="Sprite2D" parent="Walls/WallBedroomNorth" unique_id=913855074]
 texture_filter = 1
 texture_repeat = 2
-offset = Vector2(0, -8)
+position = Vector2(-16, 47)
 texture = ExtResource("9_wall_vic")
+offset = Vector2(0, -8)
 region_enabled = true
 region_rect = Rect2(0, 0, 304, 48)
 
-[node name="Window" type="Sprite2D" parent="Walls/WallBedroomNorth" unique_id=913855075]
-texture_filter = 1
-position = Vector2(-48, -8)
-texture = ExtResource("10_window")
-
 [node name="Painting" type="Sprite2D" parent="Walls/WallBedroomNorth" unique_id=913855076]
 texture_filter = 1
-position = Vector2(88, -8)
+position = Vector2(88, 29)
+scale = Vector2(0.59375, 0.59375)
 texture = ExtResource("11_painting")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBedroomNorth" unique_id=1947969490]
+position = Vector2(1, 48)
 shape = SubResource("RectangleShape2D_wall_bedroom_h")
 
 [node name="WallBedroomWest" type="StaticBody2D" parent="Walls" unique_id=24542203]
@@ -192,11 +194,14 @@ position = Vector2(-432, 0)
 [node name="Sprite2D" type="Sprite2D" parent="Walls/WallBedroomWest" unique_id=799344695]
 texture_filter = 1
 texture_repeat = 2
+position = Vector2(-16, 0)
+scale = Vector2(1, 1.0078125)
 texture = ExtResource("3_wall")
 region_enabled = true
 region_rect = Rect2(0, 0, 32, 256)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBedroomWest" unique_id=704620782]
+position = Vector2(-15, -1)
 shape = SubResource("RectangleShape2D_wall_v")
 
 [node name="WallBedroomSouth" type="StaticBody2D" parent="Walls" unique_id=494388031]
@@ -210,6 +215,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 304, 32)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/WallBedroomSouth" unique_id=412692500]
+position = Vector2(-1, 0.5)
 shape = SubResource("RectangleShape2D_wall_bedroom_h")
 
 [node name="Entities" type="Node2D" parent="." unique_id=1315024014]
@@ -1728,25 +1734,25 @@ position = Vector2(448, 480)
 position = Vector2(480, 480)
 
 [node name="MansionFireplace" parent="Entities" unique_id=1376334483 instance=ExtResource("12_fireplace_scene")]
-position = Vector2(-280, -118)
-
-[node name="MansionBookcase" parent="Entities" unique_id=606385974 instance=ExtResource("13_bookcase_scene")]
-position = Vector2(-380, -118)
+top_level = true
+position = Vector2(-190, -60)
 
 [node name="MansionBed" parent="Entities" unique_id=373461830 instance=ExtResource("14_bed_scene")]
-position = Vector2(-372, 70)
+top_level = true
+position = Vector2(-328, -48)
 
 [node name="MansionNightstand" parent="Entities" unique_id=1308310796 instance=ExtResource("15_nightstand_scene")]
-position = Vector2(-324, 70)
+top_level = true
+position = Vector2(-361, -59)
 
 [node name="MansionDesk" parent="Entities" unique_id=566725636 instance=ExtResource("16_desk_scene")]
-position = Vector2(-200, 70)
+position = Vector2(-401, 130)
 
 [node name="MansionArmchairLeft" parent="Entities" unique_id=566725637 instance=ExtResource("17_armchair_scene")]
-position = Vector2(-320, -36)
+position = Vector2(-399, 83)
 
 [node name="MansionArmchairRight" parent="Entities" unique_id=566725638 instance=ExtResource("17_armchair_scene")]
-position = Vector2(-240, -36)
+position = Vector2(-195, 111)
 
 [node name="Player" parent="Entities" unique_id=7511662 instance=ExtResource("5_player_scene")]
 
